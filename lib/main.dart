@@ -1,22 +1,13 @@
 import 'package:flutter/material.dart';
-import './questao.dart';
-import './respostas.dart';
+import './questionario.dart';
+import './resultado.dart';
 
 main() => runApp(PerguntaApp());
 
 class _PerguntaAppState extends State<PerguntaApp> {
 
   var _perguntaSelecionada = 0;
-  void _responder(){
-    setState(() {
-      _perguntaSelecionada++;
-    });    
-      
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    final perguntas = [
+  final _perguntas = const [
       {
         'texto': 'Qual a raíz quadrada de 5?',
         'respostas': ['10','15','25'],
@@ -27,26 +18,36 @@ class _PerguntaAppState extends State<PerguntaApp> {
       }
     ];
 
-    List<String> respostas = perguntas[_perguntaSelecionada].cast()['respostas'];
-    List<Widget> widgets = respostas
-      .map((t) => Resposta(t, _responder))
-      .toList();
 
-    // for(String textoResp in respostas){
-    //   widgets.add(Resposta(textoResp, _responder));
-    // }
+  void _responder(){
+    if(temPerguntaSelecionada){
+      setState(() {
+        _perguntaSelecionada++;
+      });
+    }    
+  }
+
+  bool get temPerguntaSelecionada {
+    return _perguntaSelecionada < _perguntas.length;
+  }
+
+    
+  @override
+  Widget build(BuildContext context) {
+
+    
 
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
           title: const Text('Perguntas'),
         ),
-        body: Column(
-          children: <Widget>[
-            Questao(perguntas[_perguntaSelecionada]['texto'].toString()),
-            ...widgets,
-          ],
-        ),
+        body: temPerguntaSelecionada 
+          ? Questionario(perguntas: _perguntas,
+              perguntaSelecionada: _perguntaSelecionada,
+              quandoResponder: _responder,
+            )
+          : Resultado(),
       ), 
     );
 
@@ -60,12 +61,3 @@ class PerguntaApp extends StatefulWidget {
  }
 
 }
-
-/*
-
-for (String textoResp in perguntas[_perguntaSelecionada].cast()['respostas']) {
-      respostas.add(Resposta(textoResp, _responder));
-    }
-
-Questao(perguntas[_perguntaSelecionada]['texto'].toString()),
-*/
