@@ -1,16 +1,23 @@
 import 'package:flutter/material.dart';
+import './questao.dart';
 
-main() => runApp(const PerguntaApp());
+main() => runApp(PerguntaApp());
 
+class _PerguntaAppState extends State<PerguntaApp> {
 
-class PerguntaApp extends StatelessWidget {
-  const PerguntaApp({Key? key}) : super(key: key);
+  var _perguntaSelecionada = 0;
+  void _responder(){
+    setState(() {
+      _perguntaSelecionada++;
+    });
+      print(_perguntaSelecionada);      
+  }
 
   @override
   Widget build(BuildContext context) {
     final perguntas = [
-      'WTF IS GOING ON?',
-      'Hey Bro, are you OK?',
+      'Qual a raíz quadrada de 5?',
+      'Qual a fórmula de bhaskara?',
     ];
 
     return MaterialApp(
@@ -20,46 +27,55 @@ class PerguntaApp extends StatelessWidget {
         ),
         body: Column(
           children: <Widget>[
-            Text(perguntas[0]),
+            Questao(perguntas[_perguntaSelecionada]),
             TextButton(
               style: TextButton.styleFrom(
                 backgroundColor: Colors.blue,
               ),
               child: const Text(
-                'I do not know!!!',
+                'resposta 1',
                   style: TextStyle(
                   color: Colors.white,
                 ),
               ),
-              onPressed: (){},
+              onPressed: _responder,
             ),
             TextButton(
               style: TextButton.styleFrom(
                 backgroundColor: Colors.blue,
               ),
               child: const Text(
-                'WHATT?!',
+                'resposta 2',
                 style: TextStyle(
                   color: Colors.white,
                 ),
               ),
-              onPressed: null,
+              onPressed: _responder,
             ),
             TextButton(
               style: TextButton.styleFrom(
                 backgroundColor: Colors.blue,
               ),
               child: const Text(
-                'Are you serious?!',
+                'resposta 3',
                 style: TextStyle(
                   color: Colors.white,
                 ),
               ),
-              onPressed: (){},
+              onPressed: _responder,
             ),
           ],
         ),
       ), 
     );
+
   }
+}
+
+class PerguntaApp extends StatefulWidget {
+  
+ _PerguntaAppState createState() {
+   return _PerguntaAppState();
+ }
+
 }
