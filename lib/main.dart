@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 
-main() => runApp(PerguntaApp());
+main() => runApp(const PerguntaApp());
 
 
 class PerguntaApp extends StatelessWidget {
+  const PerguntaApp({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -15,7 +16,7 @@ class PerguntaApp extends StatelessWidget {
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
-          title: Text('Perguntas'),
+          title: const Text('Perguntas'),
         ),
         body: Column(
           children: <Widget>[
@@ -24,9 +25,9 @@ class PerguntaApp extends StatelessWidget {
               style: TextButton.styleFrom(
                 backgroundColor: Colors.blue,
               ),
-              child: Text(
+              child: const Text(
                 'I do not know!!!',
-                style: TextStyle(
+                  style: TextStyle(
                   color: Colors.white,
                 ),
               ),
@@ -36,7 +37,7 @@ class PerguntaApp extends StatelessWidget {
               style: TextButton.styleFrom(
                 backgroundColor: Colors.blue,
               ),
-              child: Text(
+              child: const Text(
                 'WHATT?!',
                 style: TextStyle(
                   color: Colors.white,
@@ -48,7 +49,7 @@ class PerguntaApp extends StatelessWidget {
               style: TextButton.styleFrom(
                 backgroundColor: Colors.blue,
               ),
-              child: Text(
+              child: const Text(
                 'Are you serious?!',
                 style: TextStyle(
                   color: Colors.white,
