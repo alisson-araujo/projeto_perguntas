@@ -7,24 +7,44 @@ main() => runApp(PerguntaApp());
 class _PerguntaAppState extends State<PerguntaApp> {
 
   var _perguntaSelecionada = 0;
+  var _pontuacaoTotal = 0;
   final _perguntas = const [
       {
         'texto': 'Qual a raíz quadrada de 5?',
-        'respostas': ['10','15','25'],
+        'respostas': [
+          {'texto': '10', 'nota': 0},
+          {'texto': '35', 'nota': 0},      
+          {'texto': '15', 'nota': 0},      
+          {'texto': '25', 'nota': 10}      
+        ],
       },
       {
-        'texto': 'Quanto é 6 ao cubo?',
-        'respostas': ['36','64','216'],
+        'texto': 'Qual a raíz quadrada de 9?',
+        'respostas': [
+          {'texto': '27', 'nota': 0},
+          {'texto': '18', 'nota': 0},      
+          {'texto': '81', 'nota': 10},      
+          {'texto': '48', 'nota': 0}      
+        ],
       }
     ];
 
 
-  void _responder(){
+  void _responder(int pontuacao){
     if(temPerguntaSelecionada){
       setState(() {
         _perguntaSelecionada++;
+        _pontuacaoTotal += pontuacao;
       });
-    }    
+    }
+    print(_pontuacaoTotal);    
+  }
+
+  void _reiniciarQuestionario(){
+    setState(() {
+      _perguntaSelecionada = 0;
+      _pontuacaoTotal = 0;
+    });
   }
 
   bool get temPerguntaSelecionada {
@@ -47,7 +67,7 @@ class _PerguntaAppState extends State<PerguntaApp> {
               perguntaSelecionada: _perguntaSelecionada,
               quandoResponder: _responder,
             )
-          : Resultado(),
+          : Resultado(_pontuacaoTotal, _reiniciarQuestionario),
       ), 
     );
 
