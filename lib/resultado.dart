@@ -8,12 +8,17 @@ class Resultado extends StatelessWidget {
   Resultado(this.pontuacao, this.reiniciarQuestionario);
 
   String? get fraseResultado {
-    if(pontuacao == 10 ){
-      return 'acertou uma KKK!';
-    }else if(pontuacao > 10){
-      return 'ACERTO MIZERAVI!!!';
-    }  else{
-      return 'EROOOOOU!!!';
+    switch(pontuacao){
+      case 10:
+        return 'Ta fraco em? acertou só uma!';
+      case 20:
+        return 'Acertou duas, da para melhorar!';
+      case 30:
+        return 'Que isso em? acertou TRÊES!';
+      case 40:
+        return 'Acertou todas! GÊNIO!';
+      default:
+        return 'ERROU TUDO! KKK';
     }
   }
   
@@ -25,18 +30,19 @@ class Resultado extends StatelessWidget {
         Center(
               child: Text(
                 fraseResultado!,
-                style: TextStyle(fontSize: 28),
+                style: const TextStyle(fontSize: 28),
               ),
             ),
             TextButton(
               onPressed: reiniciarQuestionario,
               style: TextButton.styleFrom(
-                backgroundColor: Colors.blue,
+                backgroundColor: Colors.green,
               ),
               child: const Text(
                 'Reiniciar?',
                 style: TextStyle(
                   color: Colors.white,
+                  fontSize: 18,
                 ),                
               )
             ),
